@@ -2,6 +2,7 @@ from collections import deque
 from typing import Deque, List, Optional
 
 from customer import Customer
+from audio import SoundEvent, sound_manager
 
 
 class QueueManager:
@@ -13,6 +14,8 @@ class QueueManager:
     def add_customer(self, customer: Customer) -> None:
         """Add a new customer to the queue."""
         self._queue.append(customer)
+        # ding the bell when a customer enters the shop
+        sound_manager.play(SoundEvent.BELL, caption="customer entered")
 
     def list_customers(self) -> List[Customer]:
         """Return a snapshot list of customers currently in queue."""

@@ -6,6 +6,7 @@ from typing import Iterable, List
 
 from machines.base import Machine
 from queue_manager import QueueManager
+from audio import sound_manager
 
 
 class QueueDisplay:
@@ -43,3 +44,26 @@ class JobHUD:
             ("[x] " + step) if step in self.completed else ("[ ] " + step)
             for step in self.steps
         ]
+
+
+class VolumeSlider:
+    """Simple volume slider controlling the :mod:`audio` system."""
+
+    def set_level(self, level: float) -> None:
+        sound_manager.set_volume(level)
+
+    def get_level(self) -> float:
+        return sound_manager.volume
+
+
+class CaptionToggle:
+    """Enable or disable subtitles for sound events."""
+
+    def enable(self) -> None:
+        sound_manager.toggle_captions(True)
+
+    def disable(self) -> None:
+        sound_manager.toggle_captions(False)
+
+    def is_enabled(self) -> bool:
+        return sound_manager.captions_enabled
