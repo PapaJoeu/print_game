@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from .base import Machine, MachineError
+from audio import SoundEvent, sound_manager
 
 
 class Printer(Machine):
@@ -20,3 +21,9 @@ class Printer(Machine):
         super().progress(amount)
         if self.jam_at is not None and self.progress_value >= self.jam_at:
             self.error("paper jam")
+
+    def complete(self) -> str:  # type: ignore[override]
+        """Complete the print job and trigger an alert sound."""
+        job = super().complete()
+        sound_manager.play(SoundEvent.ALERT, caption="printer job complete")
+        return job
