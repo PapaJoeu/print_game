@@ -1,6 +1,6 @@
 from audio import SoundEvent, sound_manager
-from customer import Customer
-from queue_manager import QueueManager
+from customers.customer import Customer
+from customers.queue import QueueManager
 from machines import Printer
 from ui.hud import CaptionToggle, VolumeSlider
 

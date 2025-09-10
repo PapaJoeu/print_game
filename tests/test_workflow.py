@@ -1,4 +1,4 @@
-from customer import Customer
+from customers.customer import Customer
 from workflow import Station, run_workflow
 
 

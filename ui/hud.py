@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Iterable, List
 
 from machines.base import Machine
-from queue_manager import QueueManager
+from customers.queue import QueueManager
 from audio import sound_manager
 
 

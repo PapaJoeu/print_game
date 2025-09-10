@@ -1,8 +1,8 @@
 import pytest
 
-from customer import Customer
+from customers.customer import Customer
 from machines.base import Machine
-from queue_manager import QueueManager
+from customers.queue import QueueManager
 from ui.hud import JobHUD, MachineStatusPanel, QueueDisplay
 from ui.navigation import HotkeyManager, NavigationMode, Navigator
 

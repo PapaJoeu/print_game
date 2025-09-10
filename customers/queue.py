@@ -1,7 +1,7 @@
 from collections import deque
 from typing import Deque, List, Optional
 
-from customer import Customer
+from .customer import Customer
 from audio import SoundEvent, sound_manager
 
 

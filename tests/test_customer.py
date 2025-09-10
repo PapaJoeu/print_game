@@ -1,4 +1,4 @@
-from customer import (
+from customers.customer import (
     AverageCustomer,
     Customer,
     DIYCustomer,
