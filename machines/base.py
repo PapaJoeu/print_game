@@ -20,9 +20,20 @@ class Machine:
     progress_value: int = 0
     job: Optional[str] = None
     cues: List[str] = field(default_factory=list)
+    locked: bool = False
+
+    def lock(self) -> None:
+        """Prevent the machine from being used."""
+        self.locked = True
+
+    def unlock(self) -> None:
+        """Allow the machine to be used."""
+        self.locked = False
 
     def start_job(self, job: str) -> None:
         """Begin processing a new job."""
+        if self.locked:
+            raise MachineError("Machine locked")
         self.job = job
         self.progress_value = 0
         self.cues.clear()
