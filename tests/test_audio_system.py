@@ -2,7 +2,7 @@ from audio import SoundEvent, sound_manager
 from customer import Customer
 from queue_manager import QueueManager
 from machines import Printer
-from hud import CaptionToggle, VolumeSlider
+from ui.hud import CaptionToggle, VolumeSlider
 
 
 def test_entry_bell_and_caption():

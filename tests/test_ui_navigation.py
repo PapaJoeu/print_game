@@ -3,8 +3,8 @@ import pytest
 from customer import Customer
 from machines.base import Machine
 from queue_manager import QueueManager
-from hud import JobHUD, MachineStatusPanel, QueueDisplay
-from navigation import HotkeyManager, NavigationMode, Navigator
+from ui.hud import JobHUD, MachineStatusPanel, QueueDisplay
+from ui.navigation import HotkeyManager, NavigationMode, Navigator
 
 
 def test_queue_display_lists_customers():
