@@ -14,6 +14,10 @@ class QueueManager:
         """Add a new customer to the queue."""
         self._queue.append(customer)
 
+    def list_customers(self) -> List[Customer]:
+        """Return a snapshot list of customers currently in queue."""
+        return list(self._queue)
+
     def tick(self, amount: int = 1) -> List[Customer]:
         """Advance time by reducing patience; return customers who walked out."""
         walked_out: List[Customer] = []
