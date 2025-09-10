@@ -8,6 +8,9 @@ from __future__ import annotations
 
 from enum import Enum
 from typing import List
+from pathlib import Path
+
+from assets.loader import AssetLoader
 
 
 class SoundEvent(Enum):
@@ -21,7 +24,8 @@ class SoundEvent(Enum):
 class SoundManager:
     """Manage playback of sound events and caption display."""
 
-    def __init__(self) -> None:
+    def __init__(self, loader: AssetLoader | None = None) -> None:
+        self.loader = loader or AssetLoader()
         self.volume: float = 1.0
         self.captions_enabled: bool = False
         self.history: List[SoundEvent] = []
@@ -38,8 +42,20 @@ class SoundManager:
         self.captions_enabled = enabled
 
     # --- playback --------------------------------------------------------
+    def _resolve_sound(self, event: SoundEvent) -> Path:
+        """Return the file path for a given sound event."""
+        mapping = {
+            SoundEvent.BELL: "bell.wav",
+            SoundEvent.ALERT: "alert.wav",
+            SoundEvent.TTS: "tts.wav",
+        }
+        return self.loader.audio(mapping[event])
+
     def play(self, event: SoundEvent, caption: str | None = None) -> None:
         """Record a sound event and optionally show a caption."""
+        # Resolve path even if the test environment does not actually load
+        # the audio file; this ensures all consumers use the loader.
+        _path = self._resolve_sound(event)
         self.history.append(event)
         if self.captions_enabled and caption:
             self.captions.append(caption)
