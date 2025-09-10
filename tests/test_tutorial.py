@@ -2,7 +2,7 @@ import pytest
 
 from machines import Binder, Printer
 from tutorial import default_tutorial
-from pause_menu import PauseMenu
+from ui.pause_menu import PauseMenu
 
 
 def test_tutorial_unlocks_machines_and_replays():
