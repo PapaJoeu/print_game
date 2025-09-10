@@ -3,6 +3,8 @@ from customers.customer import Customer
 from customers.queue import QueueManager
 from machines import Printer
 from ui.hud import CaptionToggle, VolumeSlider
+from types import SimpleNamespace
+from unittest.mock import MagicMock
 
 
 def test_entry_bell_and_caption():
@@ -42,3 +44,34 @@ def test_volume_slider_and_speak_interface():
     sound_manager.speak("Hello")
     assert sound_manager.history[-1] is SoundEvent.TTS
     assert "Hello" in sound_manager.captions
+
+
+def test_loading_and_playback_with_mixer(monkeypatch):
+    """Sound files are loaded via the loader and played through mixer."""
+    sound_manager.sounds.clear()
+
+    mock_sound = MagicMock()
+    mixer_mock = SimpleNamespace(Sound=MagicMock(return_value=mock_sound))
+    monkeypatch.setattr("audio.mixer", mixer_mock)
+
+    sound_manager.load(SoundEvent.BELL)
+    expected_path = str(sound_manager._resolve_sound(SoundEvent.BELL))
+    mixer_mock.Sound.assert_called_with(expected_path)
+
+    sound_manager.play(SoundEvent.BELL)
+    mock_sound.set_volume.assert_called_once()
+    mock_sound.play.assert_called_once()
+
+
+def test_muting_channel_stops_playback(monkeypatch):
+    sound_manager.sounds.clear()
+    sound_manager.muted_channels.clear()
+
+    mock_sound = MagicMock()
+    mixer_mock = SimpleNamespace(Sound=MagicMock(return_value=mock_sound))
+    monkeypatch.setattr("audio.mixer", mixer_mock)
+
+    sound_manager.load(SoundEvent.BELL)
+    sound_manager.mute_channel("effects", True)
+    sound_manager.play(SoundEvent.BELL)
+    mock_sound.play.assert_not_called()
