@@ -7,7 +7,7 @@ class Binder(Machine):
     """Binding machine where players input the correct spine measurement."""
 
     def __init__(self, target_width: float = 1.0, tolerance: float = 0.05) -> None:
-        super().__init__(name="Binder")
+        super().__init__(name="Binder", locked=True)
         self.target_width = target_width
         self.tolerance = tolerance
         self._success: bool | None = None

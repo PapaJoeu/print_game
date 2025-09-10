@@ -12,7 +12,7 @@ class Cutter(Machine):
     """
 
     def __init__(self, time_per_cut: float = 1.0, setup_time: float = 2.0) -> None:
-        super().__init__(name="Cutter")
+        super().__init__(name="Cutter", locked=True)
         self.time_per_cut = time_per_cut
         self.setup_time = setup_time
         self.current_cut_type: str | None = None
