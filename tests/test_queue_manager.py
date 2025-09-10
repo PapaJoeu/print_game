@@ -1,5 +1,5 @@
-from customer import Customer
-from queue_manager import QueueManager
+from customers.customer import Customer
+from customers.queue import QueueManager
 
 
 def test_queue_manager_walk_out():

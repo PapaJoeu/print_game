@@ -1,4 +1,4 @@
-from customer import Customer
+from customers.customer import Customer
 
 
 class Station:
