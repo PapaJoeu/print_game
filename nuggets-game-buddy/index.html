@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuggets Game Buddy</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header id="app-header" class="container">
+    <div>
+      <p class="eyebrow">Is Jokic cooking right now?</p>
+      <h1>Nuggets Game Buddy</h1>
+      <p class="subtitle">Find out if the Nuggets are playing, check Jokic's line, and get a dad-ready text.</p>
+    </div>
+    <div class="refresh-controls">
+      <button id="refresh-btn" class="primary">Refresh</button>
+      <label class="toggle">
+        <input type="checkbox" id="auto-refresh-toggle" />
+        <span>Auto refresh</span>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <section id="game-status-card" class="card container">
+      <div class="status-header">
+        <div class="dot" id="status-dot"></div>
+        <p id="status-text" class="status-text">Loading game info...</p>
+      </div>
+      <p id="status-subtext" class="status-subtext"></p>
+      <p id="error-text" class="error-message" hidden>Having trouble talking to the stats server. Try refreshing.</p>
+      <p id="loading-text" class="loading-message" hidden>Fetching latest data...</p>
+    </section>
+
+    <section id="score-and-stats-section" class="container stacked" hidden>
+      <div class="card score-card">
+        <h2>Score</h2>
+        <div class="score-grid">
+          <div>
+            <p class="label">Nuggets</p>
+            <p id="nuggets-score" class="score-value">--</p>
+          </div>
+          <div>
+            <p class="label" id="opponent-label">Opponent</p>
+            <p id="opponent-score" class="score-value">--</p>
+          </div>
+        </div>
+        <p id="period-time" class="meta"></p>
+      </div>
+      <div class="card stats-card">
+        <h2>Jokic Stats</h2>
+        <div class="stat-line">
+          <div>
+            <p class="label">PTS</p>
+            <p id="pts" class="stat-value">--</p>
+          </div>
+          <div>
+            <p class="label">REB</p>
+            <p id="reb" class="stat-value">--</p>
+          </div>
+          <div>
+            <p class="label">AST</p>
+            <p id="ast" class="stat-value">--</p>
+          </div>
+        </div>
+        <div class="stat-details">
+          <p id="fgp">FG%: --</p>
+          <p id="tpp">3P%: --</p>
+          <p id="ftp">FT%: --</p>
+        </div>
+        <p id="stats-note" class="meta"></p>
+      </div>
+    </section>
+
+    <section id="message-generator-section" class="card container">
+      <div class="message-header">
+        <div>
+          <h2>Need to text your dad like you know ball?</h2>
+          <p class="subtitle">Generate a quick note based on the current game vibe.</p>
+        </div>
+        <button id="generate-message-btn" class="primary">Generate text message for my dad</button>
+      </div>
+      <div class="message-output">
+        <div id="message-text" class="generated-message" aria-live="polite">Tap the button to craft a message.</div>
+        <button id="copy-btn" class="secondary">Copy to clipboard</button>
+        <p id="copy-feedback" class="meta" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="container">
+    <p class="meta">Unofficial fan tool. Data may be delayed.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
